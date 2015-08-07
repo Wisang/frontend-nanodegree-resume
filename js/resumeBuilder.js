@@ -53,8 +53,6 @@ var work ={
 	]
 }
 
-var project = {};
-
 var formattedName = HTMLheaderName.replace("%data%", bio.name);	
 $("#header").append(formattedName);
 
@@ -71,6 +69,38 @@ $("#header").append(formattedEMail);
 $("#header").append(formattedTwitter);
 $("#header").append(formattedGithub);
 
+var project = {
+	"lectures": [
+	{
+		"title": "Test Driven Development",
+		"dates": "2009 ~ future",
+		"description": "Introduced new way of developing for C and Java"
+		//"image": ""
+	},
+	{
+		"title": "Refactoring",
+		"dates": "2009 ~ future",
+		"description": "Improving Legacy code to improve code quality for C and Java"
+		//"image": ""
+	}
+	]
+};
+
+project.display = function() {
+	$("#projects").append(HTMLprojectStart);
+	
+	for(var i in project.lectures) {
+		var formattedTitle = HTMLprojectTitle.replace("%data%", project.lectures[i].title);
+		$(".project-entry:last").append(formattedTitle);
+
+		var formattedDates = HTMLprojectDates.replace("%data%", project.lectures[i].dates);
+		$(".project-entry:last").append(formattedDates);
+
+		var formattedDescription = HTMLprojectDescription.replace("%data%", project.lectures[i].description);
+		$(".project-entry:last").append(formattedDescription);
+	}
+
+}
 
 if(bio.skills) {
 	$("#header").append(HTMLskillsStart);
@@ -83,7 +113,8 @@ if(bio.skills) {
 }
 
 displayWork();
-$("#header").append(HTMLprojectStart);
+
+project.display();
 
 $('#main').append(internationalizeButton);
 
